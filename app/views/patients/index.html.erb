@@ -78,7 +78,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Age Distribution</h5>
-          <%= scatter_chart @age_distribution %>
+          <%= line_chart @age_distribution, xtitle: "Age", ytitle: "Count", colors: ['orange'], xmin: 30, xmax: 50 %>
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Location Distribution</h5>
-          <%= column_chart @location_distribution %>
+          <%= column_chart @location_distribution, xtitle: "Province", ytitle: "Count" %>
         </div>
       </div>
     </div>
