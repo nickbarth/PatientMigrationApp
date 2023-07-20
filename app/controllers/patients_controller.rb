@@ -10,11 +10,16 @@ class PatientsController < ApplicationController
   def progress
   end
 
-  def import
+  def create
     @patient_import = PatientImport.new(import_params)
+
     if @patient_import.valid?
-      # PatientImportJob.perform_later(@patient_import.id)
-      redirect_to progress_patients_path, notice: "Patient import started."
+      file_path = Rails.root.join('tmp', @patient_import.file.original_filename)
+      File.open(file_path, 'wb') do |file|
+        file.write(@patient_import.file.read)
+      end
+      ProcessPatientsJob.perform_later(file_path.to_s)
+      render :progress, status: :unprocessable_entity
     else
       render :new, status: :unprocessable_entity
     end

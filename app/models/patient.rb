@@ -1,5 +1,5 @@
 class Patient < ApplicationRecord
-  validates :health_identifier, presence: true
+  validates :health_identifier, presence: true # , uniqueness: { scope: :health_identifier_province }
   validates :health_identifier_province, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true

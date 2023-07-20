@@ -1,8 +1,8 @@
-<h1>Patients#new</h1>
-<p>Find: me in app/views/patients/new.html.erb</p>
+<h1>Patient Import</h1>
+<p>Please select and upload your patient file to import it.</p>
 
 <div class="px-5 py-5 rounded-3 border mb-3">
-  <%= form_for @patient_import, url: import_patients_path do |form| %>
+  <%= form_for @patient_import, url: patients_path do |form| %>
     <% if @patient_import.errors.any? %>
       <div class="invalid-feedback d-block mb-3">
         <%= @patient_import.errors.full_messages.to_sentence %>.
@@ -11,7 +11,7 @@
 
     <div class="mb-3">
       <%= form.label :file, 'Patients File', class: 'form-label' %>
-      <%= form.file_field :file, accept: '.csv', class: 'form-control' %>
+      <%= form.file_field :file, accept: '*.*', class: 'form-control' %>
     </div>
 
     <%= form.submit 'Import Patients', class: 'btn btn-primary' %>

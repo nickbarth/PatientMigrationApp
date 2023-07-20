@@ -1,2 +1,13 @@
-<h1>Patients#progress</h1>
-<p>Find: me in app/views/patients/progress.html.erb</p>
+<h1>Patient Import</h1>
+<p>The patient import is now in progress.</p>
+
+<div data-controller="process-patients">
+  <div data-process-patients-target="status" class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Importing...</h4>
+    <p data-process-patients-target="message"></p>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 0%;" data-process-patients-target="progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>
