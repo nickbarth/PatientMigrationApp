@@ -11,8 +11,7 @@ class ProcessPatientsJob < ApplicationJob
     CSV.foreach(file, headers: true, header_converters: :symbol).with_index(1) do |row, i|
       patient_attributes = row.to_hash
       patient = Patient.new(patient_attributes)
-      # patients << patient_attributes.except(:id)
-      patients << patient_attributes
+      patients << patient_attributes.except(:id)
       progress = (i.to_f / total_rows * 100).round(2)
 
       if not patient.valid?
