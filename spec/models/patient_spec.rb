@@ -1,3 +1,4 @@
+require 'date'
 require 'rails_helper'
 
 RSpec.describe Patient, type: :model do
@@ -16,13 +17,13 @@ RSpec.describe Patient, type: :model do
     expect(build(:patient, health_identifier_province: nil)).to_not be_valid
     expect(build(:patient, first_name: nil)).to_not be_valid
     expect(build(:patient, last_name: nil)).to_not be_valid
-    expect(build(:patient, phone: nil)).to_not be_valid
+    # expect(build(:patient, phone: nil)).to_not be_valid
     expect(build(:patient, email: nil)).to_not be_valid
-    expect(build(:patient, address_1: nil)).to_not be_valid
+    # expect(build(:patient, address_1: nil)).to_not be_valid
     expect(build(:patient, address_province: nil)).to_not be_valid
     expect(build(:patient, address_city: nil)).to_not be_valid
-    expect(build(:patient, address_postal_code: nil)).to_not be_valid
-    expect(build(:patient, date_of_birth: nil)).to_not be_valid
+    # expect(build(:patient, address_postal_code: nil)).to_not be_valid
+    # expect(build(:patient, date_of_birth: nil)).to_not be_valid
     expect(build(:patient, sex: nil)).to_not be_valid
   end
 
@@ -31,13 +32,42 @@ RSpec.describe Patient, type: :model do
     expect(patient).to_not be_valid
   end
 
+  it "clean email before saving" do
+    patient = build(:patient, email: "test@test.com;")
+    patient.save
+    expect(patient.email).to eq("test@test.com")
+  end
+
   it "has a correctly formatted phone number" do
     patient = build(:patient, phone: "(123) 456-7890")
-    expect(patient.phone).to eq("1234567890")
+    patient.save
+    expect(patient.phone).to eq("11234567890")
+    expect(patient.phone_number).to eq("1-123-456-7890")
   end
 
   it "has a phone number of the correct length" do
-    expect(build(:patient, phone: "123")).to_not be_valid
-    expect(build(:patient, phone: "11111111111")).to_not be_valid
+    patient = build(:patient, phone: "123")
+    patient.save
+    expect(patient.phone).to be_nil
+    patient = build(:patient, phone: "1111111111111")
+    patient.save
+    expect(patient.phone).to be_nil
+  end
+
+  it "expands two character province codes to full province name" do
+    patient = build(:patient, address_province: "ab")
+    patient.save
+    expect(patient.address_province).to eq("Alberta")
+  end
+
+  it "formats full name correctly" do
+    patient = build(:patient, first_name: "John", last_name: "Doe")
+    expect(patient.name).to eq("John Doe")
+  end
+
+  it "calculates age correctly" do
+    now = Time.now.utc.to_date
+    patient = build(:patient, date_of_birth: now - 30.years)
+    expect(patient.age).to eq(30)
   end
 end

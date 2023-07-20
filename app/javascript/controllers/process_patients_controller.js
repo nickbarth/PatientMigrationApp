@@ -12,6 +12,12 @@ export default class extends Controller {
         this.progressTarget.setAttribute("aria-valuenow", data.progress);
         this.statusTarget.className = `alert alert-${data.status}`;
         this.messageTarget.innerText = data.message;
+
+        if (parseInt(data.progress) == 100) {
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1500);
+        }
       },
     });
   }

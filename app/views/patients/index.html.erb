@@ -1,2 +1,94 @@
 <h1>Dashboard</h1>
-<p>Find me in app/views/patients/index.html.erb</p>
+
+<div class="container mt-3">
+  <div class="row">
+    <!-- Total Patients Card -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Patients</h5>
+          <p class="card-text"><%= @total_patients %></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gender Distribution Pie Chart -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Gender Distribution</h5>
+          <%= pie_chart @gender_distribution %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Age Distribution Bar Chart -->
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Age Distribution</h5>
+          <%= scatter_chart @age_distribution %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Location Distribution Heatmap -->
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Location Distribution</h5>
+          <%= column_chart @location_distribution %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patients Data Table -->
+<div class="row mt-3 mb-3">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Patients Data</h5>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Health Identifier</th>
+                <th>Health Identifier Province</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address Province</th>
+                <th>Address City</th>
+                <th>Date of Birth</th>
+                <th>Sex</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @patients.each do |patient| %>
+                <tr>
+                  <td><%= patient.health_identifier %></td>
+                  <td><%= patient.health_identifier_province %></td>
+                  <td><%= patient.first_name %></td>
+                  <td><%= patient.last_name %></td>
+                  <td><%= patient.phone %></td>
+                  <td><%= patient.email %></td>
+                  <td><%= patient.address_province %></td>
+                  <td><%= patient.address_city %></td>
+                  <td><%= patient.date_of_birth %></td>
+                  <td><%= patient.sex %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

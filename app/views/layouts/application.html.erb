@@ -15,8 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
       <div class="container">
-        <a class="navbar-brand" href="#">Patient Care</a>
-
+        <%= link_to "Patient Care", root_path, class: "navbar-brand" %>
         <ul class="navbar-nav">
           <li class="nav-item"><%= link_to "Home", root_path, class: is_active?(root_path) %></li>
           <li class="nav-item"><%= link_to "Import", new_patient_path, class: is_active?(new_patient_path) %></li>

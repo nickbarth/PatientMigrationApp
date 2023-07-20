@@ -1,6 +1,10 @@
 class PatientsController < ApplicationController
   def index
-    # show dashboard
+    @patients = Patient.all
+    @total_patients = Patient.count
+    @gender_distribution = Patient.group(:sex).count
+    @age_distribution = Patient.age_distribution
+    @location_distribution = Patient.group(:health_identifier_province).count
   end
 
   def new
