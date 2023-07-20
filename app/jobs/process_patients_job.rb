@@ -19,7 +19,7 @@ class ProcessPatientsJob < ApplicationJob
         ActionCable.server.broadcast 'patient_import_channel', {
           progress: progress,
           status: "warning",
-          message: "Import aborted. Error validating patient at row #{i}: #{patient.errors.full_messages.to_sentence}"
+          message: "Patient import aborted. Error validating patient at row #{i}: #{patient.errors.full_messages.to_sentence}"
         }
         return # abort if invalid
       end
@@ -51,7 +51,7 @@ class ProcessPatientsJob < ApplicationJob
       ActionCable.server.broadcast 'patient_import_channel', {
         progress: 0,
         status: "warning",
-        message: "Import aborted. Error occurred while importing patients: #{e.message}"
+        message: "Patient import aborted. Error occurred while importing patients: #{e.message}"
       }
   end
 end

@@ -1,6 +1,55 @@
 <h1>Dashboard</h1>
+<p>Welcome to back to Patient Data Management System.</p>
 
 <div class="container mt-3">
+
+  <!-- Patients Data Table -->
+  <div class="row mt-3 mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Patients Data</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Health ID</th>
+                  <th>HID Province</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Address Province</th>
+                  <th>Address City</th>
+                  <th>Age</th>
+                  <th>Sex</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @patients.each do |patient| %>
+                  <tr>
+                    <td><%= patient.health_identifier %></td>
+                    <td><%= patient.health_identifier_province %></td>
+                    <td><%= patient.name %></td>
+                    <td><%= patient.phone %></td>
+                    <td><%= patient.email %></td>
+                    <td><%= patient.address_province %></td>
+                    <td><%= patient.address_city %></td>
+                    <td><%= patient.age %></td>
+                    <td><%= patient.sex %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row justify-content-center">
+    <%= will_paginate @patients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+  </div>
+
   <div class="row">
     <!-- Total Patients Card -->
     <div class="col-md-6">
@@ -11,7 +60,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Gender Distribution Pie Chart -->
     <div class="col-md-6">
       <div class="card">
@@ -22,7 +71,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Age Distribution Bar Chart -->
   <div class="row mt-3">
     <div class="col">
@@ -34,9 +83,9 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Location Distribution Heatmap -->
-  <div class="row mt-3">
+  <div class="row mt-3 mb-3">
     <div class="col">
       <div class="card">
         <div class="card-body">
@@ -46,49 +95,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Patients Data Table -->
-<div class="row mt-3 mb-3">
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Patients Data</h5>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Health Identifier</th>
-                <th>Health Identifier Province</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Address Province</th>
-                <th>Address City</th>
-                <th>Date of Birth</th>
-                <th>Sex</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @patients.each do |patient| %>
-                <tr>
-                  <td><%= patient.health_identifier %></td>
-                  <td><%= patient.health_identifier_province %></td>
-                  <td><%= patient.first_name %></td>
-                  <td><%= patient.last_name %></td>
-                  <td><%= patient.phone %></td>
-                  <td><%= patient.email %></td>
-                  <td><%= patient.address_province %></td>
-                  <td><%= patient.address_city %></td>
-                  <td><%= patient.date_of_birth %></td>
-                  <td><%= patient.sex %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-

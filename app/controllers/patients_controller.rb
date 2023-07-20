@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
   def index
-    @patients = Patient.all
+    @patients = Patient.paginate(page: params[:page], per_page: 5)
     @total_patients = Patient.count
     @gender_distribution = Patient.group(:sex).count
     @age_distribution = Patient.age_distribution

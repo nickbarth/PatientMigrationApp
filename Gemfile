@@ -78,3 +78,7 @@ group :development, :test do
 end
 
 gem "chartkick", "~> 5.0"
+
+gem "will_paginate", "~> 4.0"
+
+gem "will_paginate-bootstrap-style", "~> 0.3.0"
